@@ -1,0 +1,38 @@
+﻿<controls:ProWindow x:Class="CCTool.Scripts.Attribute.FieldString.ChineseNumChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+        mc:Ignorable="d"
+        Title="中文数字与阿拉伯数字互转" Height="300" Width="400" 
+                    WindowStartupLocation="CenterScreen" 
+                    Icon="/CCTool;component/Data/Icons/Atoolbox.png"
+    >
+    <controls:ProWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CCTool;component/Data/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:ProWindow.Resources>
+    <Grid>
+        <GroupBox Header="处理模式" Margin="18,120,19,0" Height="65" VerticalAlignment="Top"/>
+
+
+        <Label Content="选择要素图层或表：" HorizontalAlignment="Left" Margin="18,12,0,0" VerticalAlignment="Top" Width="111"/>
+        <ComboBox x:Name="combox_fc" Style="{StaticResource ComboBox_icon}" Margin="129,14,19,0" VerticalAlignment="Top" DropDownOpened="combox_fc_DropDown"/>
+        <Button x:Name="btn_go" Style="{StaticResource btn_run}" Margin="0,0,18,23" Click="btn_go_click" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" />
+
+        <Button x:Name="btn_help" Style="{StaticResource btn_help}" Margin="0,0,100,23" HorizontalAlignment="Right" Click="btn_help_click" Height="24" VerticalAlignment="Bottom"/>
+        <RadioButton x:Name="rb_cn_num" Content="中文数字转阿拉拍数字" HorizontalAlignment="Left" Margin="27,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.476,-0.433" IsChecked="True"/>
+        <RadioButton x:Name="rb_num_cn" Content="阿拉拍数字转中文数字" HorizontalAlignment="Left" Margin="206,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.476,-0.433" Width="149"/>
+        <Label Content="输入字段(文本型)：" HorizontalAlignment="Left" Margin="18,46,0,0" VerticalAlignment="Top" Width="111"/>
+        <ComboBox x:Name="combox_field_input" Style="{StaticResource ComboBox_icon}" Margin="129,48,19,0" VerticalAlignment="Top" DropDownOpened="combox_field_input_DropDown"/>
+        <Label Content="输出字段(文本型)：" HorizontalAlignment="Left" Margin="18,79,0,0" VerticalAlignment="Top" Width="111"/>
+        <ComboBox x:Name="combox_field_output" Style="{StaticResource ComboBox_icon}" Margin="129,81,19,0" VerticalAlignment="Top" DropDownOpened="combox_field_output_DropDown"/>
+
+
+    </Grid>
+</controls:ProWindow>

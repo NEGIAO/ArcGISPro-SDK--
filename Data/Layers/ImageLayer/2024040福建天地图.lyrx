@@ -1,0 +1,89 @@
+{
+  "type" : "CIMLayerDocument",
+  "version" : "3.0.0",
+  "build" : 36056,
+  "layers" : [
+    "CIMPATH=__/img_fj.json"
+  ],
+  "layerDefinitions" : [
+    {
+      "type" : "CIMTiledServiceLayer",
+      "name" : "2024040福建天地图",
+      "uRI" : "CIMPATH=__/img_fj.json",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant"
+      },
+      "useSourceMetadata" : true,
+      "description" : "天地图福建在线地图服务系统",
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "elevationSurfaceLayerURI" : "CIMPATH=__/4ec427f88a744e7ca3ab8c00a1bd24ce.json"
+      },
+      "layerType" : "Operational",
+      "showLegends" : true,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "serviceConnection" : {
+        "type" : "CIMWMTSServiceConnection",
+        "layerName" : "img_fj",
+        "version" : "1.0.0",
+        "serverConnection" : {
+          "type" : "CIMProjectServerConnection",
+          "anonymous" : true,
+          "hideUserProperty" : true,
+          "url" : "http://service.fjmap.net/img_fj/WMTS",
+          "connectionMode" : "Consumer",
+          "serverType" : "WMTS",
+          "useDefaultStagingFolder" : true
+        },
+        "style" : "default",
+        "imageFormat" : "tiles"
+      }
+    }
+  ],
+  "rGBColorProfile" : "sRGB IEC61966-2.1",
+  "cMYKColorProfile" : "U.S. Web Coated (SWOP) v2",
+  "elevationSurfaceLayerDefinitions" : [
+    {
+      "type" : "CIMElevationSurfaceLayer",
+      "name" : "地面",
+      "uRI" : "CIMPATH=__/4ec427f88a744e7ca3ab8c00a1bd24ce.json",
+      "sourceModifiedTime" : {
+        "type" : "TimeInstant"
+      },
+      "useSourceMetadata" : true,
+      "description" : "地面",
+      "expanded" : true,
+      "layerType" : "Operational",
+      "showLegends" : false,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "maxDisplayCacheAge" : 5,
+      "showPopups" : true,
+      "serviceLayerID" : -1,
+      "refreshRate" : -1,
+      "refreshRateUnit" : "esriTimeUnitsSeconds",
+      "blendingMode" : "Alpha",
+      "allowDrapingOnIntegratedMesh" : true,
+      "elevationMode" : "BaseGlobeSurface",
+      "verticalExaggeration" : 1,
+      "color" : {
+        "type" : "CIMRGBColor",
+        "values" : [
+          255,
+          255,
+          255,
+          100
+        ]
+      },
+      "surfaceTINShadingMode" : "Smooth"
+    }
+  ]
+}

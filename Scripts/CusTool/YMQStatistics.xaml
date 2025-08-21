@@ -1,0 +1,56 @@
+﻿<controls:ProWindow x:Class="CCTool.Scripts.CusTool.YMQStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:CCTool.Scripts.CusTool"
+        mc:Ignorable="d"
+        Title="淹没区分析(BHM)" Height="450" Width="600"
+                    WindowStartupLocation="CenterScreen"
+                    Icon="/CCTool;component/Data/Icons/Atoolbox.png"
+    >
+    <controls:ProWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CCTool;component/Data/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:ProWindow.Resources>
+
+    <Grid>
+
+        <Label Content="选择耕地图层(面)：" HorizontalAlignment="Left" Margin="15,12,0,0" VerticalAlignment="Top" Width="193" Height="25"/>
+        <Label Content="输出Excel文件路径：" HorizontalAlignment="Left" Margin="15,257,0,0" VerticalAlignment="Top" Width="123" Height="25"/>
+        <TextBox x:Name="textExcelPath" Style="{StaticResource TextBoxNormal}" Margin="128,259,38,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top"/>
+        <Button x:Name="openExcelButton" Style="{StaticResource btn_openFolder}" Margin="0,259,15,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="openExcelButton_Click"/>
+        <Button x:Name="btn_go" Style="{StaticResource btn_run}" Margin="0,0,16,28"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="btn_go_Click" />
+
+        <Button x:Name="btn_help" Style="{StaticResource btn_help}" Margin="0,0,98,28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="btn_help_Click"/>
+        <Label Content="选择淹没区图层：" HorizontalAlignment="Left" Margin="15,219,0,0" VerticalAlignment="Top" Width="110" Height="25"/>
+        <ComboBox x:Name="combox_zone" Style="{StaticResource ComboBox_icon}" Margin="114,221,0,0" VerticalAlignment="Top" DropDownOpened="combox_zone_DropDown" Height="21" HorizontalAlignment="Left" Width="202"/>
+        <Label Content="统计字段1：" HorizontalAlignment="Left" Margin="336,12,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <Label Content="统计字段2：" HorizontalAlignment="Left" Margin="467,12,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <ComboBox x:Name="combox_gd" Style="{StaticResource ComboBox_icon}" Margin="19,36,0,0" VerticalAlignment="Top" DropDownOpened="combox_gd_DropDown" Height="21" HorizontalAlignment="Left" Width="297"/>
+        <ComboBox x:Name="combox_gd_field1" Style="{StaticResource ComboBox_icon}" Margin="341,36,0,0" VerticalAlignment="Top" DropDownOpened="combox_gd_field1_DropDown" Height="21" HorizontalAlignment="Left" Width="112"/>
+        <ComboBox x:Name="combox_gd_field2" Style="{StaticResource ComboBox_icon}" Margin="473,36,0,0" VerticalAlignment="Top" DropDownOpened="combox_gd_field2_DropDown" Height="21" HorizontalAlignment="Left" Width="112"/>
+        <Label Content="选择永久基本农田图层(面)：" HorizontalAlignment="Left" Margin="15,60,0,0" VerticalAlignment="Top" Width="193" Height="25"/>
+        <Label Content="统计字段1：" HorizontalAlignment="Left" Margin="336,60,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <Label Content="统计字段2：" HorizontalAlignment="Left" Margin="467,60,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <ComboBox x:Name="combox_jbnt" Style="{StaticResource ComboBox_icon}" Margin="19,84,0,0" VerticalAlignment="Top" DropDownOpened="combox_jbnt_DropDown" Height="21" HorizontalAlignment="Left" Width="297"/>
+        <ComboBox x:Name="combox_jbnt_field1" Style="{StaticResource ComboBox_icon}" Margin="341,84,0,0" VerticalAlignment="Top" DropDownOpened="combox_jbnt_field1_DropDown" Height="21" HorizontalAlignment="Left" Width="112"/>
+        <ComboBox x:Name="combox_jbnt_field2" Style="{StaticResource ComboBox_icon}" Margin="473,84,0,0" VerticalAlignment="Top" DropDownOpened="combox_jbnt_field2_DropDown" Height="21" HorizontalAlignment="Left" Width="112"/>
+        <Label Content="选择房台图层(面)：" HorizontalAlignment="Left" Margin="15,109,0,0" VerticalAlignment="Top" Width="193" Height="25"/>
+        <Label Content="统计字段1：" HorizontalAlignment="Left" Margin="336,109,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <ComboBox x:Name="combox_ft" Style="{StaticResource ComboBox_icon}" Margin="19,133,0,0" VerticalAlignment="Top" DropDownOpened="combox_ft_DropDown" Height="21" HorizontalAlignment="Left" Width="297"/>
+        <ComboBox x:Name="combox_ft_field" Style="{StaticResource ComboBox_icon}" Margin="341,133,0,0" VerticalAlignment="Top" DropDownOpened="combox_ft_field_DropDown" Height="21" HorizontalAlignment="Left" Width="243"/>
+        <Label Content="选择道路图层(线)：" HorizontalAlignment="Left" Margin="15,157,0,0" VerticalAlignment="Top" Width="193" Height="25"/>
+        <Label Content="统计字段1：" HorizontalAlignment="Left" Margin="336,157,0,0" VerticalAlignment="Top" Width="93" Height="25"/>
+        <ComboBox x:Name="combox_road" Style="{StaticResource ComboBox_icon}" Margin="19,181,0,0" VerticalAlignment="Top" DropDownOpened="combox_road_DropDown" Height="21" HorizontalAlignment="Left" Width="297"/>
+        <ComboBox x:Name="combox_road_field" Style="{StaticResource ComboBox_icon}" Margin="341,181,0,0" VerticalAlignment="Top" DropDownOpened="combox_road_field_DropDown" Height="21" HorizontalAlignment="Left" Width="243"/>
+        <Label Content="面积类型：" Margin="338,219,0,0" VerticalAlignment="Top" Height="25" HorizontalAlignment="Left" Width="69"/>
+        <ComboBox x:Name="combox_areaType" Margin="407,221,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="177"/>
+
+    </Grid>
+</controls:ProWindow>

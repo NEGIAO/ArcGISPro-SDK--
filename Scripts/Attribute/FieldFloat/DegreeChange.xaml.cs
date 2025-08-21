@@ -1,0 +1,340 @@
+﻿using ArcGIS.Core.Data;
+using ArcGIS.Core.Data.UtilityNetwork.Trace;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
+using CCTool.Scripts.Manager;
+using CCTool.Scripts.ToolManagers;
+using CCTool.Scripts.ToolManagers.Extensions;
+using NPOI.OpenXmlFormats.Vml;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using CheckBox = System.Windows.Controls.CheckBox;
+using Table = ArcGIS.Core.Data.Table;
+
+namespace CCTool.Scripts.UI.ProWindow
+{
+    /// <summary>
+    /// Interaction logic for DegreeChange.xaml
+    /// </summary>
+    public partial class DegreeChange : ArcGIS.Desktop.Framework.Controls.ProWindow
+    {
+        public DegreeChange()
+        {
+            InitializeComponent();
+            // combox_model框中添加2种转换模式，默认【度分秒转十进制度】
+            combox_model.Items.Add("度分秒转十进制度");
+            combox_model.Items.Add("十进制度转度分秒");
+            combox_model.SelectedIndex = 0;
+
+        }
+
+        // 定义一个进度框
+        private ProcessWindow processwindow = null;
+        string tool_name = "度分秒转十进制度";
+
+        private void combox_fc_DropDown(object sender, EventArgs e)
+        {
+            UITool.AddFeatureLayerAndTableToComboxPlus(combox_fc);
+
+        }
+
+        private async void btn_go_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // 获取参数
+                string fc_path = combox_fc.ComboxText();
+                string model = combox_model.Text;
+
+                // 判断参数是否选择完全
+                if (fc_path == "" || model == "" || listBox_field.Items.Count == 0)
+                {
+                    MessageBox.Show("有必选参数为空！！！");
+                    return;
+                }
+
+                // 字段列表
+                List<string> list_field = new List<string>();
+                foreach (CheckBox item in listBox_field.Items)
+                {
+                    if (item.IsChecked == true)
+                    {
+                        list_field.Add(item.Content.ToString());
+                    }
+                }
+
+                // 打开进度框
+                ProcessWindow pw = UITool.OpenProcessWindow(processwindow, tool_name);
+                pw.AddMessageTitle(tool_name);
+
+                Close();
+
+                await QueuedTask.Run(() =>
+                {
+                    pw.AddMessageStart("检查数据");
+                    // 检查数据
+                    List<string> errs = CheckData(fc_path, list_field, model);
+                    // 打印错误
+                    if (errs.Count > 0)
+                    {
+                        foreach (var err in errs)
+                        {
+                            pw.AddMessageMiddle(10, err, Brushes.Red);
+                        }
+                        return;
+                    }
+
+                    foreach (var oldFieldName in list_field)
+                    {
+                        pw.AddMessageMiddle(20, @$"处理字段： {oldFieldName}");
+
+                        // 新字段名
+                        string modelName = model[(model.IndexOf("转") + 1)..];
+                        string oldNameUpdata = oldFieldName;
+                        if (oldFieldName.Contains("_转_"))
+                        {
+                            oldNameUpdata = oldFieldName[..oldFieldName.IndexOf("_转_")];
+                        }
+                        string newFieldName = $@"{oldNameUpdata}_转_{modelName}";
+                        // 转换模式对应的字段类型
+                        string FieldType = model switch
+                        {
+                            "度分秒转十进制度" => "Double",
+                            "十进制度转度分秒" => "TEXT",
+                            _ => "",
+                        };
+
+                        // 创建字段
+                        Arcpy.AddField(fc_path, newFieldName, FieldType);
+
+                        // 获取Table
+                        var tb = fc_path.TargetTable();
+                        // 字段计算
+                        using ArcGIS.Core.Data.Table table = tb;
+                        using RowCursor rowCursor = table.Search(null, false);
+                        TableDefinition tableDefinition = table.GetDefinition();
+
+                        while (rowCursor.MoveNext())
+                        {
+                            using Row row = rowCursor.Current;
+                            if (model == "度分秒转十进制度")      // 【度分秒转十进制度】模式
+                            {
+                                var value_text = row[oldFieldName];    // 获取输入的度分秒字段值
+                                if (value_text is null)       // 先排除空值的情况
+                                {
+                                    row[newFieldName] = null;
+                                }
+                                else if (value_text.ToString() == "")       // 空字符的情况
+                                {
+                                    row[newFieldName] = null;
+                                }
+                                else                // 【度分秒转十进制度】主流程
+                                {
+                                    // 初始化度分秒符号的位置
+                                    int index1 = -1;
+                                    int index2 = -1;
+                                    int index3 = -1;
+                                    // 定义度分秒可能的符号
+                                    List<string> list_degree = new List<string>() { "度", "°" };
+                                    List<string> list_minutes = new List<string>() { "分", "′", "'" };
+                                    List<string> list_seconds = new List<string>() { "秒", "″", "\"" };
+                                    // 找到度分秒符号的位置
+                                    foreach (var item in list_degree)
+                                    {
+                                        if (value_text.ToString().IndexOf(item) != -1)
+                                        {
+                                            index1 = value_text.ToString().IndexOf(item);
+                                        }
+                                    }
+                                    foreach (var item in list_minutes)
+                                    {
+                                        if (value_text.ToString().IndexOf(item) != -1)
+                                        {
+                                            index2 = value_text.ToString().IndexOf(item);
+                                        }
+                                    }
+                                    foreach (var item in list_seconds)
+                                    {
+                                        if (value_text.ToString().IndexOf(item) != -1)
+                                        {
+                                            index3 = value_text.ToString().IndexOf(item);
+                                        }
+                                    }
+                                    // 计算度分秒数值
+                                    double degree = double.Parse(value_text.ToString().Substring(0, index1));
+                                    double minutes = double.Parse(value_text.ToString().Substring(index1 + 1, index2 - index1 - 1));
+                                    double seconds = double.Parse(value_text.ToString().Substring(index2 + 1, index3 - index2 - 1));
+                                    // 计算赋值
+                                    row[newFieldName] = degree + minutes / 60 + seconds / 3600;
+                                }
+                            }
+                            else if (model == "十进制度转度分秒")      // 【十进制度转度分秒】模式
+                            {
+                                var value_float = row[oldFieldName];
+
+                                if (value_float is null)          // 先排除空值的情况
+                                {
+                                    row[newFieldName] = null;
+                                }
+                                else if (double.Parse(value_float.ToString()) == 0)       // 0值的情况
+                                {
+                                    row[newFieldName] = null;
+                                }
+                                else             // 【十进制度转度分秒】主流程
+                                {
+                                    double value = double.Parse(value_float.ToString());
+                                    // 计算度分秒的值
+                                    int degree = (int)(value / 1);
+                                    int minutes = (int)(value % 1 * 60 / 1);
+                                    double seconds = (value % 1 * 60 - minutes) * 60;
+                                    // 合并为字符串
+                                    row[newFieldName] = degree.ToString() + "°" + minutes.ToString() + "′" + seconds.ToString("0.00") + "″";
+                                }
+                            }
+                            // 保存
+                            row.Store();
+                        }
+                    }
+                });
+                pw.AddMessageEnd();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message + ee.StackTrace);
+                return;
+            }
+        }
+
+        private void combox_model_Closed(object sender, EventArgs e)
+        {
+            UpdataFieldListBox();
+        }
+
+        private void combox_fc_Closed(object sender, EventArgs e)
+        {
+            UpdataFieldListBox();
+        }
+
+        // 更新字段列表框
+        private void UpdataFieldListBox()
+        {
+            string lyName = combox_fc.ComboxText();
+            string model = combox_model.Text;
+
+            if (lyName != "")
+            {
+                if (model == "度分秒转十进制度")
+                {
+                    UITool.AddTextFieldsToListBox(listBox_field, lyName);
+                }
+                else if (model == "十进制度转度分秒")
+                {
+                    UITool.AddFloatFieldsToListBox(listBox_field, lyName);
+                }
+            }
+        }
+
+        private void btn_help_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://blog.csdn.net/xcc34452366/article/details/135689034?spm=1001.2014.3001.5502";
+            UITool.Link2Web(url);
+        }
+
+        private List<string> CheckData(string in_data, List<string> list_field, string model)
+        {
+            List<string> result = new List<string>();
+
+            string oid = in_data.TargetIDFieldName();
+
+            foreach (var oldFieldName in list_field)
+            {
+                // 获取Table
+                Table table = in_data.TargetTable();
+                using RowCursor rowCursor = table.Search();
+
+                while (rowCursor.MoveNext())
+                {
+                    using Row row = rowCursor.Current;
+                    string oidValue = row[oid].ToString();
+
+                    if (model == "度分秒转十进制度")
+                    {
+                        var value_text = row[oldFieldName];
+                        if (value_text is null)       // 先排除空值的情况
+                        {
+                            result.Add($"【OID:{oidValue}】输入为空值");
+                        }
+                        else if (value_text.ToString() == "")       // 空字符的情况
+                        {
+                            result.Add($"【OID:{oidValue}】输入为空字符串");
+                        }
+                        else                // 【度分秒转十进制度】主流程
+                        {
+                            // 初始化度分秒符号的位置
+                            int index1 = -1;
+                            int index2 = -1;
+                            int index3 = -1;
+                            // 定义度分秒可能的符号
+                            List<string> list_degree = new List<string>() { "度", "°" };
+                            List<string> list_minutes = new List<string>() { "分", "′", "'" };
+                            List<string> list_seconds = new List<string>() { "秒", "″", "\"" };
+                            // 找到度分秒符号的位置
+                            foreach (var item in list_degree)
+                            {
+                                if (value_text.ToString().IndexOf(item) != -1)
+                                {
+                                    index1 = value_text.ToString().IndexOf(item);
+                                }
+                            }
+                            foreach (var item in list_minutes)
+                            {
+                                if (value_text.ToString().IndexOf(item) != -1)
+                                {
+                                    index2 = value_text.ToString().IndexOf(item);
+                                }
+                            }
+                            foreach (var item in list_seconds)
+                            {
+                                if (value_text.ToString().IndexOf(item) != -1)
+                                {
+                                    index3 = value_text.ToString().IndexOf(item);
+                                }
+                            }
+                            // 如果不含特定字符
+                            if (index1 == -1 || index2 == -1 || index3 == -1)
+                            {
+                                result.Add($"【OID:{oidValue}】输入不规范");
+                            }
+                        }
+                    }
+                    else if (model == "十进制度转度分秒")      // 【十进制度转度分秒】模式
+                    {
+                        var value_float = row[oldFieldName];
+
+                        if (value_float is null)          // 先排除空值的情况
+                        {
+                            result.Add($"【OID:{oidValue}】输入为空值");
+                        }
+                        else if (double.Parse(value_float.ToString()) == 0)       // 0值的情况
+                        {
+                            result.Add($"【OID:{oidValue}】输入为0");
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+}

@@ -1,0 +1,222 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using ArcGIS.Core.Data;
+using ArcGIS.Desktop.Core;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
+using CCTool.Scripts.Manager;
+using CCTool.Scripts.ToolManagers;
+using CCTool.Scripts.ToolManagers.Extensions;
+using CCTool.Scripts.ToolManagers.Managers;
+using NPOI.OpenXmlFormats.Vml;
+
+namespace CCTool.Scripts.DataPross.FeatureClasses
+{
+    /// <summary>
+    /// Interaction logic for AdjustmentsTool.xaml
+    /// </summary>
+    public partial class AdjustmentsTool : ArcGIS.Desktop.Framework.Controls.ProWindow
+    {
+        public AdjustmentsTool()
+        {
+            InitializeComponent();
+            // 初始化combox
+            combox_unit.Items.Add("平方米");
+            combox_unit.Items.Add("公顷");
+            combox_unit.Items.Add("平方公里");
+            combox_unit.Items.Add("亩");
+            combox_unit.SelectedIndex = 0;
+
+            combox_areaType.Items.Add("投影面积");
+            combox_areaType.Items.Add("图斑面积");
+            combox_areaType.SelectedIndex = 1;
+
+            combox_digit.Items.Add("1");
+            combox_digit.Items.Add("2");
+            combox_digit.Items.Add("3");
+            combox_digit.Items.Add("4");
+            combox_digit.Items.Add("5");
+            combox_digit.Items.Add("6");
+            combox_digit.SelectedIndex = 1;
+        }
+
+        // 定义一个进度框
+        private ProcessWindow processwindow = null;
+        string tool_name = "面积平差";
+
+        private void combox_fc_DropDown(object sender, EventArgs e)
+        {
+            UITool.AddFeatureLayersToComboxPlus(combox_fc);
+        }
+
+        private void combox_field_DropDown(object sender, EventArgs e)
+        {
+            UITool.AddFloatFieldsToComboxPlus(combox_fc.ComboxText(), combox_field);
+        }
+
+        private void combox_land_DropDown(object sender, EventArgs e)
+        {
+            UITool.AddFeatureLayersToComboxPlus(combox_land);
+        }
+
+        private async void btn_go_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // 获取参数
+                string fc_path = combox_fc.ComboxText();
+                string fc_field = combox_field.ComboxText();
+                string land_path = combox_land.ComboxText();
+                string area_type = combox_areaType.Text[..2];
+                string unit = combox_unit.Text;
+                int digit = int.Parse(combox_digit.Text);
+
+                bool isFieldOpen = (bool)check_fd.IsChecked;
+                string areaField = combox_areaField.ComboxText();
+
+                // 默认数据库位置
+                var gdb_path = Project.Current.DefaultGeodatabasePath;
+                // 工程默认文件夹位置
+                string folder_path = Project.Current.HomeFolderPath;
+
+                // 判断参数是否选择完全
+                if (fc_path == "" || fc_field == "" || land_path == "" || area_type == "" || unit == "" || combox_digit.Text == "")
+                {
+                    MessageBox.Show("有必选参数为空！！！");
+                    return;
+                }
+
+                // 打开进度框
+                ProcessWindow pw = UITool.OpenProcessWindow(processwindow, tool_name);
+                pw.AddMessageTitle(tool_name);
+
+                Close();
+                await QueuedTask.Run(() =>
+                {
+                    pw.AddMessageStart("检查数据");
+                    // 检查数据
+                    List<string> errs = CheckData(fc_path, land_path);
+                    // 打印错误
+                    if (errs.Count > 0)
+                    {
+                        foreach (var err in errs)
+                        {
+                            pw.AddMessageMiddle(10, err, Brushes.Red);
+                        }
+                        return;
+                    }
+
+                    pw.AddMessageMiddle(10, "平差计算", Brushes.Gray);
+                    // 获取原始字段
+                    List<string> fieldList = GisTool.GetFieldsNameFromTarget(fc_path);
+
+                    string resultLayer = "";
+
+                    if (isFieldOpen == true && areaField is not null && areaField != "")
+                    {
+                        resultLayer = ComboTool.Adjustment(fc_path, land_path, gdb_path + @"\Adjustment", area_type, unit, digit, areaField);
+                    }
+                    else
+                    {
+                        // 平差计算
+                        resultLayer = ComboTool.Adjustment(fc_path, land_path, gdb_path + @"\Adjustment", area_type, unit, digit);
+                    }
+
+                    pw.AddMessageMiddle(50, "结果赋值", Brushes.Gray);
+                    // 字段赋值
+                    Arcpy.CalculateField(resultLayer, fc_field, $"!{area_type}!");
+
+                    pw.AddMessageMiddle(20, "覆盖图层", Brushes.Gray);
+                    // 返回覆盖图层
+                    string fcFullPath = fc_path.TargetLayerPath();
+                    Arcpy.CopyFeatures(resultLayer, fcFullPath, true);
+
+                    pw.AddMessageMiddle(20, "删除中间字段", Brushes.Gray);
+                    // 删除中间字段
+                    string fields = "";
+                    foreach (var field in fieldList)
+                    {
+                        fields += field + ";";
+                    }
+                    string re = fields.Substring(0, fields.Length - 1);
+                    Arcpy.DeleteField(fcFullPath, re, "KEEP_FIELDS");
+                });
+                pw.AddMessageEnd();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message + ee.StackTrace);
+                return;
+            }
+        }
+
+        private void combox_areaField_DropOpen(object sender, EventArgs e)
+        {
+            string fd = combox_fc.ComboxText();
+            if (fd is not null && fd != "")
+            {
+                UITool.AddFloatFieldsToComboxPlus(fd, combox_areaField);
+            }
+        }
+
+        private void check_fd_Uncheck(object sender, RoutedEventArgs e)
+        {
+            combox_areaField.IsEnabled = false;
+        }
+
+        private void check_fd_Check(object sender, RoutedEventArgs e)
+        {
+            combox_areaField.IsEnabled = true;
+        }
+
+        private void btn_help_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://blog.csdn.net/xcc34452366/article/details/135822374?spm=1001.2014.3001.5501";
+            UITool.Link2Web(url);
+        }
+
+        private List<string> CheckData(string fc_path, string land_path)
+        {
+            List<string> result = new List<string>();
+            // 检查 land_path是否多部件，多要素
+            int count = Arcpy.GetCount(land_path);
+            if (count > 1)
+            {
+                result.Add("范围图层存在多个要素，只能保留一个");
+            }
+            else if(count == 1)
+            {
+                string countResult = CheckTool.CheckMultiPart(land_path);
+
+                if (countResult != "")
+                {
+                    result.Add(countResult);
+                }
+            }
+
+            // 检查用地和范围是否完全重合
+            string def_gdb = Project.Current.DefaultGeodatabasePath;
+            string re = $@"{def_gdb}\re";
+            Arcpy.SymDiff(fc_path, land_path, re);
+            int reCount = Arcpy.GetCount(re);
+            if (reCount > 0)
+            {
+                result.Add("用地图层和范围图层不完全重合。");
+            }
+            Arcpy.Delect(re);
+
+            return result;
+        }
+    }
+}

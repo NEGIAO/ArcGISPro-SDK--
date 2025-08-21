@@ -1,0 +1,72 @@
+﻿using ArcGIS.Core.CIM;
+using ArcGIS.Core.Data;
+using ArcGIS.Core.Geometry;
+using ArcGIS.Desktop.Catalog;
+using ArcGIS.Desktop.Core;
+using ArcGIS.Desktop.Editing;
+using ArcGIS.Desktop.Extensions;
+using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Framework.Contracts;
+using ArcGIS.Desktop.Framework.Dialogs;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
+using ArcGIS.Desktop.Layouts;
+using ArcGIS.Desktop.Mapping;
+using CCTool.Scripts.Manager;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace CCTool.Scripts.UI.ProButton
+{
+    internal class VgPictureAll : Button
+    {
+        // 定义一个进度框
+        private ProcessWindow processwindow = null;
+        string tool_name = "村规_制图汇总";
+
+        protected override async void OnClick()
+        {
+            try
+            {
+                // 打开进度框
+                ProcessWindow pw = UITool.OpenProcessWindow(processwindow, tool_name);
+                pw.AddMessageTitle(tool_name);
+                pw.AddMessageStart("获取村庄名称");
+
+                await QueuedTask.Run(() =>
+                {
+                    // 获取村庄名称列表
+                    List<string> village_names = VG.GetVillageNames();
+                    // 处理每个村庄
+                    foreach (var village_name in village_names)
+                    {
+                        pw.AddMessageMiddle(10, "【" + village_name + "】\r");
+                        // 创建文件目录
+                        VG.CreateJPGFolder(village_name);
+
+                        pw.AddMessageMiddle(10, "1、生成村域综合现状图", Brushes.Gray);
+                        // 1、生成村域综合现状图
+                        VG.CreateXZT(village_name, pw);
+
+                        pw.AddMessageMiddle(10, "2、生成村域综合规划图", Brushes.Gray);
+                        // 2、生成村域综合规划图
+                        VG.CreateGHT(village_name, pw);
+
+                        pw.AddMessageMiddle(10, "3、生成国土空间管制边界图", Brushes.Gray);
+                        // 3、生成国土空间管制边界图
+                        VG.CreateGKBJT(village_name, pw);
+                    }
+                });
+                pw.AddMessageEnd();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message + ee.StackTrace);
+                return;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+﻿<controls:ProWindow x:Class="CCTool.Scripts.TableMenu.FieldAttribute"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+        mc:Ignorable="d"
+            Title="字段属性" Height="249" Width="300" 
+                WindowStartupLocation="CenterScreen"
+                Icon="/CCTool;component/Data/Icons/Atoolbox.png"
+>
+    <controls:ProWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CCTool;component/Data/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:ProWindow.Resources>
+    <Grid>
+        <Label Content="字段名称：" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="67"/>
+        <Button x:Name="btn_help" Style="{StaticResource btn_help}" Margin="0,0,16,14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="btn_help_Click"/>
+        <Label Content="字段别名：" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox x:Name="text_aliasName" Margin="82,45,16,0"  IsReadOnly="True" Height="22" VerticalAlignment="Top"/>
+        <Label Content="字段类型：" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox x:Name="text_type" Margin="82,78,16,0"  IsReadOnly="True" Height="22" VerticalAlignment="Top"/>
+        <Label Content="字段长度：" HorizontalAlignment="Left" Margin="10,108,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox x:Name="text_length" Margin="82,110,16,0"  IsReadOnly="True" Height="22" VerticalAlignment="Top"/>
+        <TextBox x:Name="text_name" Margin="82,12,16,0"  IsReadOnly="True" Height="22" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</controls:ProWindow>

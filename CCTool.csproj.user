@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Page Update="Data\Themes\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Data\Themes\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Data\Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Data\Themes\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldFloat\CalculateArea.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\AddLayerNameToField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\CalculateFieldPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\FieldCalculateLab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\ChineseNumChange.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\SetBSMCode.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\ZfillZero.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\Dat2FeatureClass.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\ExportBoundary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\HBVillageStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\Photo2Point.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\Resort.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\StatisticsFlood3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\StatisticsYDYH2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\StatisticsYDYHD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool2\WordReplace2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\BondaryPoint2Excel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\CheckFeatureClass.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\CheckTXT.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\Excel2PolygonCom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\ExportBoundaryPoints4.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\GroupBSM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\InsectSta.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\LDStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\PickJDFeature.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\SDStatisticPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\UpdataFileName.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\WriteGDToExcel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\YDAnalysis.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool3\ZoomStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ClipHisImage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ClipImage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ContentLine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ExcelBoundaryTable.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ExportBound2Excel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\FoureDirections.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\Polygon2BoundaryPolyline2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\Polygon2BoundaryPolyline3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\QHVillageFQ.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\QHVillageTable.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\SDStatisticArea.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\SDStatisticCom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\SearchSameField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\SelectByExcelField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\StatisticsFlood.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\StatisticsFlood2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\SXVillageTable.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\WordReplace.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\YED2SD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\YMQStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\CusTool\ZJVillageTable.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\CAD\CADJZAnalysis.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\Excel2JPG.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExportBoundaryPointsByCustom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExportBoundaryPointsByCustom2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExportBoundaryPointsByCustom3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExportBoundaryPointsByCustom4.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\MergeExcel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\Polygon2BoundaryPoint.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\Polygon2BoundaryPolyline.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\SetBoundaryPointsFromNW.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\SpliteExcel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\HandleArc.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\AdjustmentsTool.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\AdjustmentsTool2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\AttributeReader.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\AttributeReaderPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\ClearFeatureClassZM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\DissolveAsField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\FeatureLayerCheck.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\FourColor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\IdentityAsMax.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\Json2Polygon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\SearchArc.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\SearchShortLine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\GDB\ClearEmptyFeatureClass.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\GDB\MDB2GDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\GDB\MergeGDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureClasses\SHP2KML.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\SHP\Splite2SHP.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\FeatureClass2TXT.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\SHP2TXTbyCom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDChanger.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatistic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\StatisticsXZGH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\HandleAcuteAngle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\StyleMix\CreateSimplePolygonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\StyleMix\ExchangeStylxValue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\StyleMix\FeatureLayerToStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\StyleMix\SortStylxItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\StyleMix\StylxToFeatureLayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\TableMenu\FieldStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\ToolManagers\Windows\TitleMessage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\TXT2SHP.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\FeaturePross\AreaStatisticsByField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\FeaturePross\LengthStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GDBMenu\CalculateBSM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GDBMenu\CalculateYSDM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GDBMenu\ClearGDBAll.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\QT\CalTFH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\QT\IntersectStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\QT\IntersectStatisticsPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\QT\SQSXStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatisticYDHori.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatisticYDHori3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\StatisticsSDL.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\Remove0DM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\StatisticsYDYHHH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\Supply0DM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\UpdataYDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\YDYHOld2New.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerExport\Export2CADPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross2\AddLayerField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\ChangeRenderLabel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\DisslovPD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\ExportRAR.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\FeatureCheck\FindAcuteAngle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\GetPolygonExtent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\GridAnnatation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\SortByField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\TopologySet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\ZoomToFeature.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MapMenu\AddMapServer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\ToolManagers\Windows\XYInfoWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\GetInfo\InfoDifFieldValue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\GetInfo\InfoFields.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\GetInfo\InfoFieldValue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\GetInfo\InfoLayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\GetInfo\InfoMapPoints.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\CodeMaker.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\Domain2IP.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\GetComputerID.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\Num2Chinese.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\ProjectionZone.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MiniTool\MTool\String2Unicode.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\ToolManagers\Windows\CoordinateSystemWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\ToolManagers\Windows\MsgWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\ToolManagers\Windows\ProcessWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\AddFields.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\ApplySymbologyYDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\FeaturePross\AreaStatistics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\AttributeMapper.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\AttributeMapperPlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\CalculateFields.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\CheckYDChange.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\CheckYDChangePlus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\CheckYDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\GDB\ClipGDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\CopyFields.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\CreateGradYDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldFloat\DegreeChange.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExcelToEmptyGDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\Excel\ExportBoundaryPoints.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\MapCreate\ExportLayout.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\MixApp\MapCreate\ExportLayoutByLayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\FieldClear.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\GetCave.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldString\GetWord.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\CAD\MergerCAD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\SHP\MergeSHP.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\LayerPross\MultipleAnnatation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\PHShp2Txt.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\PHTxt2Shp.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SD2YDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\SortFeild.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\StatisticsSD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\StatisticsSDDL.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\StatisticsYDYH.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\TXT\TXT2GDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Attribute\FieldMix\UpdateAliasName.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\DataPross\GDB\UpdateGDB.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\UI\ManagerBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\UI\ProButton\ProWindow1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\Village\Prepare\VgSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\YDYH\YDYHChanger.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatistic1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatistic3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Scripts\GHApp\SD\SDStatisticYD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

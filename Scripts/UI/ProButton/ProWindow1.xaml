@@ -1,0 +1,16 @@
+﻿<controls:ProWindow x:Class="CCTool.Scripts.UI.ProButton.ProWindow1"
+        xmlns="http://github.com/avaloniaui"
+        xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+        mc:Ignorable="d"
+        Title="ProWindow1" Height="319" Width="484"
+        WindowStartupLocation="CenterOwner"
+    >
+    <d:ListBox d:ItemsSource="{d:SampleData ItemCount=5}" AllowDrop="True" Margin="80,43,148,80"/>
+
+
+
+</controls:ProWindow>
